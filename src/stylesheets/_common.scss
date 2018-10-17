@@ -1,0 +1,14 @@
+
+
+.page {
+    padding: 15px;
+}
+
+.a {
+    @include ju-border-radius;
+}
+
+.load-img {
+    background: url('../../static/image/load-img.gif')no-repeat center center ;
+    background-size: cover;
+}
