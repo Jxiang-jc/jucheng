@@ -13,14 +13,7 @@
         </mt-tabbar>
     </mt-tabbar>
 </template>
-
 <script>
-import Vue from 'vue'
-
-// 引入mint-ui
-import Mint from 'mint-ui'
-Vue.use(Mint)
-
 export default {
   name: 'JuFooter',
   data () {
@@ -71,7 +64,7 @@ export default {
 <style lang="scss" scoped>
   *{box-sizing:border-box;}
   .mint-tab-item.footerwz{
-    height: 0.5rem;
+    height: 108px;
   }
   .mint-tabbar.is-fixed{
     border-top:1px solid #e6e6e6;
@@ -82,4 +75,5 @@ export default {
     color: #ff7919;
     background:#EEF3FA;
   }
+
 </style>

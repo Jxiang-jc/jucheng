@@ -12,16 +12,17 @@ import axios from 'axios'
 // filters
 import './filters'
 
-//  rem
-import computedRem from './rem'
+import 'lib-flexible/flexible'
 
-// 全局引入样式
+// 引入weui
+import 'weui'
+
+// 引入mint-ui
+import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
+Vue.use(Mint)
 
 // ajax请求
 Vue.prototype.$http = axios
-
-//  计算rem
-computedRem()
 
 Vue.config.productionTip = false
