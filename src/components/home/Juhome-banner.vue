@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getbanner () {
-      this.$http.get('http://localhost:9999/getImg').then(res => {
+      this.$http.get('/api/getImg').then(res => {
         console.log(res.data)
       })
     }

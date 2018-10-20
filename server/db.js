@@ -51,12 +51,12 @@ function Mongo(options) {
         //更新数据
         let updateDocument = function (db, callback) {
             let collection = db.collection(collectionName);
-            collection.updateOne(updateData
-                , {$set: data}, function (err, result) {
+            collection.update(updateData
+                , {$set: data},function (err, result) {
                     if (!err) {
-                        func(true);
+                        func(true,err);
                     } else {
-                        func(false);
+                        func(false,err);
                     }
                     callback(result);
                 });
