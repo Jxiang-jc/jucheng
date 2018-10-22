@@ -9,13 +9,13 @@ let server = new Server();
 app.get("/getImg", function (req, res) {
   function getBanner() {
     return new Promise(function (resolve, reject) {
-      res.append("Access-Control-Allow-Origin", "*")
+      // res.append("Access-Control-Allow-Origin", "*")
       request('https://www.duitang.com/napi/mbanner/?app_code=mdt',
       function (err, response, body) {
         if (err) {throw err}
         
         // console.log(body)
-        // res.send(body)
+        res.send(body)
         resolve(body)
       })
     })

@@ -111,7 +111,7 @@ export default {
     line-height: 24px;
     color: #333;
     outline: 0;
-    background: #f0f0f0 url(../../../static/image/homeheader/search.png) no-repeat 25px 15px;
+    background: #f0f0f0 url(../../../../static/image/homeheader/search.png) no-repeat 25px 15px;
 }
 
 .search-top .search-bar.search1 .right {

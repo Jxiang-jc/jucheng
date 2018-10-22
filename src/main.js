@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 
 // 全局的配置
-import './modules/config'
+import './modules/config.js'
 
 Vue.config.productionTip = false
 

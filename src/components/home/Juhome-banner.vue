@@ -4,10 +4,10 @@
             <img :src="item.images.large" />
         </mt-swipe-item>
     </mt-swipe> -->
-    <mt-swipe :auto="4000" >
-        <mt-swipe-item>1</mt-swipe-item>
-        <mt-swipe-item>2</mt-swipe-item>
-        <mt-swipe-item>3</mt-swipe-item>
+    <mt-swipe :auto="4000" class="load-img">
+        <mt-swipe-item v-for="(item,idx) in lunbolist" :key="idx">
+            <img :src="item.image | formatImage" />
+        </mt-swipe-item>
     </mt-swipe>
 </template>
 
@@ -15,7 +15,6 @@
 export default {
   data () {
     return {
-      movielist: [],
       lunbolist: []
     }
   },
@@ -26,6 +25,7 @@ export default {
     getbanner () {
       this.$http.get('/api/getImg').then(res => {
         console.log(res.data)
+        this.lunbolist = res.data.data.object_list
       })
     }
   }
@@ -34,11 +34,11 @@ export default {
 
 <style lang="scss" scoped>
 .mint-swipe {
-  height: 200px;
+  height: 400px;
   margin-top: 94px;
-  background: red;
 }
 .mint-swipe img {
   width: 100%;
+  height: 400px;
 }
 </style>

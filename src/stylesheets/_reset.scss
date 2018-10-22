@@ -24,7 +24,7 @@ em,i{font-style:normal;}
 
 b,strong,h1,h2,h3,h4,h5,h6{font-weight:normal;}
 
-.clear:after{content:""; display:block; clear:both; height:0; visibility:hidden;}
+.clearfix:after{content:""; display:block; clear:both; height:0; visibility:hidden;}
 
 table{border-collapse:collapse;}
 

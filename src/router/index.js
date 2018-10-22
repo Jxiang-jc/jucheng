@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import juhome from '@/components/home/Juhome'
-import jusearch from '@/components/home/jusearch'
-import jucitylist from '@/components/home/jucitylist'
+import jusearch from '@/components/home/search/jusearch'
+import jucitylist from '@/components/home/citylist/jucitylist'
 
 Vue.use(Router)
 
