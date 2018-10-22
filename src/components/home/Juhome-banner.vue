@@ -1,14 +1,9 @@
 <template>
-    <!-- <mt-swipe :show-indicators="false" :auto="3000">
-        <mt-swipe-item v-for="(item,idx) in lunbolist" :key="idx">
-            <img :src="item.images.large" />
-        </mt-swipe-item>
-    </mt-swipe> -->
-    <mt-swipe :auto="4000" class="load-img">
-        <mt-swipe-item v-for="(item,idx) in lunbolist" :key="idx">
-            <img :src="item.image | formatImage" />
-        </mt-swipe-item>
-    </mt-swipe>
+<mt-swipe :auto="4000" class="load-img">
+    <mt-swipe-item v-for="(item,idx) in lunbolist" :key="idx">
+        <img :src="item.image | formatImage" />
+    </mt-swipe-item>
+</mt-swipe>
 </template>
 
 <script>

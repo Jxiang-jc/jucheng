@@ -1,51 +1,24 @@
 <template>
 <div class="hot-wrap">
-    <div class="title ">热门演出
-        <div class="switch-bar"
-        @click="changShow"
-        :class="{'list-icon':active2}"></div>
-    </div>
-    <div class="showBox" v-show="active1">
-        <div class="list-wrap1 clearfix">
-            <a href="#"
-            v-for="(showlist,idx) in showlists" :key="idx"
-            class="show-item1 clearfix ">
-                <div class="poster-box">
-                    <div class="bgloading load-img2">
-                        <img :src="showlist.pic" alt="" class="poster-pic" >
-                    </div>
-                    <span v-html="showlist.ico"></span>
-                </div>
-                <div class="poster-ctn">
-                    <p class="poster-name" v-text="showlist.show_name"></p>
-                    <p class="poster-time">
-                        {{showlist.display_show_time}}
-                        <span class="poster-address" v-text="showlist.city_name"></span>
-                    </p>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="list-wrap" v-show="active2">
+    <div class="list-wrap">
         <a href="#" class="show-item clearfix"
         v-for="(showlist,idx) in showlists" :key="idx">
             <div class="show-left fl load-img2">
-                <img :src="showlist.pic" alt="">
+                <img :src="`http://image.juooo.com${showlist.pic}`" alt="">
                 <span v-html="showlist.ico"></span>
             </div>
             <div class="show-right fl">
-                <p class="title" v-text="showlist.show_name"></p>
+                <p class="title" v-text="showlist.schedular_name"></p>
                 <p class="show-time ">
-                    <span class="day">{{showlist.display_show_time}}</span>
+                    <span class="day">{{showlist.show_time}}</span>
                 </p>
                 <p class="show-venue ">
-                    <span class="city" v-text="showlist.city_name"></span>
-                    <span class="vunue" v-text="showlist.venue_name"></span>
+                    <span class="city">[{{showlist.c_name}}]</span>
+                    <span class="vunue" v-text="showlist.v_name"></span>
                 </p>
                 <div class="start-price">
                     <i class="icon icon-yuan ">￥</i>
-                    <span class="yuan" v-text="filter(showlist.show_price)"></span>
-                    <span class="start-hint">元起</span>
+                    <span class="yuan" v-text="showlist.min_price"></span>
                 </div>
             </div>
         </a>
@@ -58,9 +31,7 @@
 export default {
   data () {
     return {
-      showlists: [],
-      active1: true,
-      active2: false
+      showlists: []
     }
   },
   created () {
@@ -68,34 +39,30 @@ export default {
   },
   methods: {
     getList () {
-      this.$http.post('/showlist/index/hotsShowList', {
+      this.$http.post('/showlist/Show/getShowList', {
         params: {
-          city_id: 3
+          city_id: 0,
+          category: 0,
+          keywords: '',
+          activity_id: 0,
+          sort_type: 0,
+          page: 1
         }
       }).then(res => {
-        console.log(res)
-        this.showlists = res.data.data
+        console.log(res.data.data)
+        this.showlists = res.data.data.list
       })
-    },
-    // 筛选价格 '200 - 1500' => '200'
-    filter (price) {
-      if (price === 0 || price === 2000) {
-        return price
-      } else {
-        var a = price.split(' - ')
-        return a[0]
-      }
-    },
-    changShow () {
-      this.active1 = !this.active1
-      this.active2 = !this.active2
     }
   }
 }
 </script>
 <style scoped lang="scss">
-@import '../../stylesheets/_base.scss';
-.showBox,.list-wrap{
+@import '../../../stylesheets/_base.scss';
+.hot-wrap{
+    margin-top:159px;
+}
+.list-wrap{
+    margin-top:20px;
     margin-bottom:120px;
 }
 .hot-wrap > .title {
@@ -111,12 +78,12 @@ export default {
     position: absolute;
     top: 20px;
     right: 30px;
-    background: url(../../../static/image/homecontent/icon-palace.png) no-repeat
+    background: url(../../../../static/image/homecontent/icon-palace.png) no-repeat
       center center;
     background-size: 36px 36px;
   }
   .list-icon{
-    background: url(../../../static/image/homecontent/list-icon.png) no-repeat
+    background: url(../../../../static/image/homecontent/list-icon.png) no-repeat
     center center;
     background-size: 36px 36px;
   }
@@ -163,17 +130,6 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.poster-time {
-    font-size: 24px;
-    color: #b3b3b3;
-    padding: 8px 80px 8px 8px;
-    overflow: hidden;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    line-height: 28px;
-    position: relative;
-}
 
 .list-wrap {
     width: 100%;
@@ -218,20 +174,20 @@ export default {
                 .day{
                     display: inline-block;
                     margin-right: 10px;
-                    font-size:26px;
+                    font-size:22px;
                     height:32px;line-height:32px;
                     color:#666;
                 }
             }
             .show-venue > .city{
                 margin-right:8px;
-                font-size:26px;
+                font-size:22px;
                 color: #666;
             }
             .show-venue > .vunue {
                 padding-left: 9px;
                 border-left: 1px solid #999;
-                font-size:26px;
+                font-size:22px;
                 color:#666;
             }
             .start-price {
@@ -239,7 +195,7 @@ export default {
                 min-width: 148px;
                 padding: 0 17px;
                 height: 69px;
-                background: url(../../../static/image/homecontent/bg-priceBtn.png) no-repeat center center;
+                background: url(../../../../static/image/homecontent/bg-priceBtn.png) no-repeat center center;
                 background-size: 100% 100%;
                 line-height: 55px;
                 color: #fff;
