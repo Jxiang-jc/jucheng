@@ -38,7 +38,7 @@ export default {
         },
         {
           title: '我的',
-          id: 'coming_soon',
+          id: 'Mine',
           icon1: 'mine1',
           icon2: 'mine2',
           changeImg: this.$route.name === 'coming_soon' ? true : false
@@ -56,7 +56,14 @@ export default {
     goto (id) {
       // 路由传递数据,主vue上传递的参数在所有副vue都能拿到。副路由通过props接收到。
       // 而所有副路由都可以传递给主路由。因此可以实现子路由->主路由->子路由。
-      this.$router.push({name: id, params: {}})
+      if (id === 'Home') {
+        this.$router.push({name: id})
+      } else if (id === 'Juplay') {
+        this.$router.push({name: id, query: {caid: 0}})
+      } else if (id === 'Mine') {
+        this.$router.push({name: id, query: {caid: 0}})
+      }
+      
       this.currentTab = id
     }
   },

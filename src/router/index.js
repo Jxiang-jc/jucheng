@@ -4,7 +4,7 @@ import juhome from '@/components/home/Juhome'
 import jusearch from '@/components/home/search/jusearch'
 import jucitylist from '@/components/home/citylist/jucitylist'
 import juplay from '@/components/performance/Juplay'
-// import Juall from '@/components/performance/children/Juall'
+import judetails from '@/components/details/JuDetails.vue'
 
 Vue.use(Router)
 
@@ -45,6 +45,11 @@ export default new Router({
       //     // 如果无所谓,就直接用component即可
       //   }
       // ]
+    },
+    {
+      path: '/judetails',
+      name: 'JuDetails',
+      component: judetails
     }
   ]
 })

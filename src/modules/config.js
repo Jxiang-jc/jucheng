@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+/* eslint-disable */
 import Vue from 'vue'
 // // swiper css
 import 'swiper/dist/css/swiper.min.css'
@@ -20,9 +22,14 @@ import 'weui'
 // 引入mint-ui
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
+// 刷新页面时转圈圈
+import { Indicator } from 'mint-ui' 
+
 Vue.use(Mint)
 
 // ajax请求
 Vue.prototype.$http = axios
+
+Vue.prototype.$loading = Indicator
 
 Vue.config.productionTip = false

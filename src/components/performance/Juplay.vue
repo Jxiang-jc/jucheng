@@ -1,8 +1,8 @@
 <template>
     <div class="ju-play">
-        <Juheader />
+        <Juheader v-on:sort="filt" v-on:change="tab"/>
         <router-view></router-view>
-        <Juall />
+        <Juall :type="sort" :num="dataId"/>
         <Jufooter />
     </div>
 </template>
@@ -19,25 +19,24 @@ export default {
     Juall
   },
   data () {
-    return {}
+    return {
+      sort: '推荐排序',
+      dataId: 0
+    }
+  },
+  methods: {
+    filt (val) {
+    //   console.log(val)
+      this.sort = val[0]
+    },
+    tab (val) {
+    //   console.log(val)
+      this.dataId = val
+    }
   }
 }
 </script>
 
 <style>
-.logo_i {
-    width: 58px;
-    height: 70px;
-    display: block;
-    position: absolute;
-    top: 0;
-    right:0;
-    left: auto;
-    background: url(../../../static/image/homecontent/juooo.png) 0 0 no-repeat;
-    background-size: 100%;
-}
-.ju_cheng {
-    background: url(../../../static/image/homecontent/ju_cheng.png) 0 0 no-repeat;
-    background-size: 100%;
-}
+
 </style>

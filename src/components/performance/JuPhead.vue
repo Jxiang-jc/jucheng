@@ -11,21 +11,34 @@
             <span>搜索演出、艺人或场馆</span>
         </router-link>
         <a href="javascript:void(0)" class="right js-show-bg">
-            <span class="iconfont icon-filter2"></span>
+            <span class="iconfont icon-filter2"
+            @click="popupVisible = !popupVisible"
+            ></span>
         </a>
     </div>
+    <div class="tri" v-show="popupVisible"></div>
     <div class="search-nav">
         <div class="search_nav_wrap js-search-nav">
             <a href="javascript:void(0);"
             class="search_nav_item"
             v-for="(nav,idx) in navs" :key="idx"
             :data-id="nav.dataId"
-            :class="{active : nav.isShow}"
+            :class="{active : nav.dataId == changePath}"
             v-text="nav.title"
-            @click="highlight(idx)">
+            @click="highlight(idx);
+            changeTab(nav.dataId);
+            keepLight(nav.dataId)">
             </a>
         </div>
     </div>
+    <mt-popup
+    v-model="popupVisible"
+    popup-transition="popup-fade"
+    closeOnClickModal="true"
+    position="top">
+      <mt-picker :slots="slots" @change="onValuesChange">
+      </mt-picker>
+    </mt-popup>
 </header>
 
 </template>
@@ -33,6 +46,7 @@
 export default {
   data () {
     return {
+      popupVisible: false,
       navs: [
         {
           title: '全部',
@@ -79,15 +93,46 @@ export default {
           dataId: 99,
           isShow: false
         }
-      ]
+      ],
+      slots: [{
+        values: ['推荐排序', '时间排序']
+      }],
+      filter: '推荐排序'
     }
   },
   methods: {
+    // 刷新保持当前标签高亮
+    keepLight (num) {
+      this.$router.push({name: 'Juplay', query: {caid: num}})
+    },
+    // 点击 子 -> 父 -> 子 通讯
+    changeTab (num) {
+      this.$emit('change', num)
+    },
+    // 点击高亮
     highlight (idx) {
       this.navs.map(item => {
         item.isShow = false
         this.navs[idx].isShow = true
       })
+    },
+    // 般透明罩
+    ShouPup () {
+      this.popupVisible = true
+    },
+    // 下拉触发事件
+    onValuesChange (picker, values) {
+      this.message = values
+      this.$emit('sort', values)
+      if (values[0] > values[1]) {
+        picker.setSlotValue(1, values[0])
+      }
+      this.popupVisible = false
+    }
+  },
+  computed: {
+    changePath () {
+      return this.$route.query.caid
     }
   }
 }
@@ -192,5 +237,34 @@ export default {
       border-bottom: 3px solid #ff7919;
     }
   }
+}
+
+.mint-popup {
+  position: fixed;
+  background: #fff;
+  top: 5%;
+  right: -10%;
+  left:auto;
+  width: 200px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 6px 12px 6px 16px;
+}
+.mint-popup.mint-popup-top{
+  height:150px;
+}
+.picker-item{
+  top:-20px;
+}
+.tri {
+  position: absolute;
+  top: 47px;
+  right: 42px;
+  width: 20px;
+  height: 20px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  z-index:10000000000000000000000000000;
 }
 </style>

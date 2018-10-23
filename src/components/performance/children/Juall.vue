@@ -1,57 +1,124 @@
 <template>
 <div class="hot-wrap">
-    <div class="list-wrap">
-        <a href="#" class="show-item clearfix"
-        v-for="(showlist,idx) in showlists" :key="idx">
-            <div class="show-left fl load-img2">
-                <img :src="`http://image.juooo.com${showlist.pic}`" alt="">
-                <span v-html="showlist.ico"></span>
-            </div>
-            <div class="show-right fl">
-                <p class="title" v-text="showlist.schedular_name"></p>
-                <p class="show-time ">
-                    <span class="day">{{showlist.show_time}}</span>
-                </p>
-                <p class="show-venue ">
-                    <span class="city">[{{showlist.c_name}}]</span>
-                    <span class="vunue" v-text="showlist.v_name"></span>
-                </p>
-                <div class="start-price">
-                    <i class="icon icon-yuan ">￥</i>
-                    <span class="yuan" v-text="showlist.min_price"></span>
+    <mt-loadmore  :bottom-method="loadBottom" :bottom-all-loaded="allLoadeds" ref="loadmore" @bottom-status-change="handleBottomChange">
+        <div class="list-wrap">
+            <a href="#" class="show-item clearfix"
+            v-for="(showlist,idx) in showlists" :key="idx"
+            @click="detail(idx)">
+                <div class="show-left fl load-img2">
+                    <img :src="`http://image.juooo.com${showlist.pic}`" alt="">
+                    <span v-html="showlist.ico"></span>
                 </div>
-            </div>
-        </a>
-    </div>
+                <div class="show-right fl">
+                    <p class="title" v-text="showlist.schedular_name"></p>
+                    <p class="show-time ">
+                        <span class="day">{{showlist.show_time}}</span>
+                    </p>
+                    <p class="show-venue ">
+                        <span class="city">[{{showlist.c_name}}]</span>
+                        <span class="vunue" v-text="showlist.v_name"></span>
+                    </p>
+                    <div class="start-price">
+                        <i class="icon icon-yuan ">￥</i>
+                        <span class="yuan" v-text="showlist.min_price"></span>
+                    </div>
+                </div>
+            </a>
+        <div slot="bottom" class="mint-loadmore-bottom">
+            <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
+        </div>
+        </div>
+    </mt-loadmore>
 </div>
 </template>
 
 <script>
-
+// post请求如果不这样做的话无法成功传递参数到后端，后端识别不了
+import Qs from 'qs'
 export default {
+  props: ['type', 'num'],
   data () {
     return {
-      showlists: []
+      showlists: [],
+      totalPage: 0, // 总数
+      count: 20, // api接口所需
+      page: 1, // api接口所需
+      sort: 0, // 筛选切换
+      categoryId: 0, // tab切换
+      allLoadeds: false, // 向上加载ui所需
+      bottomStatus: '' // 向上加载ui所需
     }
   },
   created () {
+    this.categoryId = this.$route.query.caid
     this.getList()
   },
+  watch: {
+    type (newvalue) {
+      // console.log(newvalue)
+      if (newvalue === '时间排序') {
+        this.sort = 1
+        this.showlists = []
+        this.getList()
+      } else {
+        this.sort = 0
+        this.showlists = []
+        this.getList()
+      }
+    },
+    num (val) {
+      // console.log(val)
+      this.categoryId = val
+      this.showlists = []
+      this.getList()
+    }
+  },
   methods: {
+    // 获取数据并渲染
     getList () {
-      this.$http.post('/showlist/Show/getShowList', {
-        params: {
-          city_id: 0,
-          category: 0,
-          keywords: '',
-          activity_id: 0,
-          sort_type: 0,
-          page: 1
-        }
+      // loading
+      this.$loading.open()
+      this.$http({
+        headers: {
+          'deviceCode': 'A95ZEF1-47B5-AC90BF3'
+        },
+        method: 'post',
+        url: '/showlist/Show/getShowList',
+        data: Qs.stringify({
+          'city_id': 0,
+          'category': this.categoryId,
+          'keywords': '',
+          'activity_id': 0,
+          'sort_type': this.sort,
+          'page': this.page
+        })
       }).then(res => {
         console.log(res.data.data)
-        this.showlists = res.data.data.list
+        let obj = res.data.data
+        this.totalPage = Math.ceil(obj.total / this.count)
+        this.showlists.push(...obj.list)
+        // 去除loading的效果
+        this.$loading.close()
       })
+    },
+    // UI
+    loadBottom () {
+      this.page++
+      if (this.page > this.totalPage) {
+        this.allLoaded = true
+        return
+      }
+      console.log(this.page)
+      this.getList()
+    },
+    // 下拉时的状态
+    handleBottomChange (status) {
+      this.bottomStatus = status
+    },
+    detail (idx) {
+      var obj = JSON.stringify(this.showlists[idx])
+      window.sessionStorage.setItem('goods', obj)
+      this.$router.push({name: 'JuDetails'})
     }
   }
 }
@@ -219,5 +286,35 @@ export default {
         }
     }
 }
+/* 只要设置这个时:bottom-method="loadBottom" 才能生效*/
+.hot-wrap{overflow-y:auto;}
+.mint-loadmore-bottom {
+    span {
+        display: inline-block;
+        transition: .2s linear;
+        vertical-align: middle;
 
+    }
+    .mint-spinner {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+</style>
+<style>
+.logo_i{
+    width: 58px;
+    height: 70px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right:0;
+    left: auto;
+    background: url(../../../../static/image/homecontent/juooo.png) 0 0 no-repeat;
+    background-size: 100%;
+}
+.ju_cheng {
+    background: url(../../../../static/image/homecontent/ju_cheng.png) 0 0 no-repeat;
+    background-size: 100%;
+}
 </style>
