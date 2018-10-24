@@ -1,7 +1,7 @@
 <template>
     <div class="ju-play">
         <Juheader v-on:sort="filt" v-on:change="tab"/>
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
         <Juall :type="sort" :num="dataId"/>
         <Jufooter />
     </div>

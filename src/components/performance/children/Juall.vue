@@ -2,7 +2,8 @@
 <div class="hot-wrap">
     <mt-loadmore  :bottom-method="loadBottom" :bottom-all-loaded="allLoadeds" ref="loadmore" @bottom-status-change="handleBottomChange">
         <div class="list-wrap">
-            <a href="#" class="show-item clearfix"
+            <!-- <router-link to="/judetails" slot="left" class="link"> -->
+            <a class="show-item clearfix"
             v-for="(showlist,idx) in showlists" :key="idx"
             @click="detail(idx)">
                 <div class="show-left fl load-img2">
@@ -24,6 +25,7 @@
                     </div>
                 </div>
             </a>
+            <!-- </router-link> -->
         <div slot="bottom" class="mint-loadmore-bottom">
             <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
         </div>
@@ -35,6 +37,8 @@
 <script>
 // post请求如果不这样做的话无法成功传递参数到后端，后端识别不了
 import Qs from 'qs'
+import $ from 'jquery' // 目的是为跳转后滚动条的位置
+
 export default {
   props: ['type', 'num'],
   data () {
@@ -118,7 +122,8 @@ export default {
     detail (idx) {
       var obj = JSON.stringify(this.showlists[idx])
       window.sessionStorage.setItem('goods', obj)
-      this.$router.push({name: 'JuDetails'})
+      this.$router.push({name: 'JuDetails', params: {}})
+      $(window).scrollTop(0)
     }
   }
 }
@@ -301,8 +306,8 @@ export default {
     }
 }
 </style>
-<style>
-.logo_i{
+<style scoped>
+>>>.logo_i{
     width: 58px;
     height: 70px;
     display: block;
@@ -313,7 +318,7 @@ export default {
     background: url(../../../../static/image/homecontent/juooo.png) 0 0 no-repeat;
     background-size: 100%;
 }
-.ju_cheng {
+>>>.ju_cheng {
     background: url(../../../../static/image/homecontent/ju_cheng.png) 0 0 no-repeat;
     background-size: 100%;
 }

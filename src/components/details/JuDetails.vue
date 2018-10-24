@@ -1,16 +1,33 @@
 <template>
-<mt-header fixed >
-  <router-link to="/juplay" slot="left">
-    <mt-button icon="back"></mt-button>
-  </router-link>
-  <mt-button icon="more" slot="right"></mt-button>
-</mt-header>
+<div>
+  <ju-dheader />
+  <ju-dadaptive />
+  <ju-dartical />
+  <JuDticketNotice />
+  <ju-dfooter />
+  <!-- <div class='img-wrap'>
+      <img src="../../assets/logo.png" id="img" data-adaptive-background>
+  </div> -->
+</div>
 </template>
-
 <script>
-export default {}
+
+import JuDheader from './JuDheader'
+import JuDfooter from './JuDfooter'
+import JuDadaptive from './JuDadaptive'
+import JuDartical from './JuDartical'
+import JuDticketNotice from './JuDticket-notice'
+export default {
+  components: {
+    JuDheader,
+    JuDfooter,
+    JuDadaptive,
+    JuDartical,
+    JuDticketNotice
+  }
+}
 </script>
 
-<style>
-*{background-color:blueviolet;}
+<style scoped lang="scss">
+
 </style>

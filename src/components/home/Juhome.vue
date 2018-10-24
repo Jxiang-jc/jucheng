@@ -37,19 +37,4 @@ export default {
 </script>
 
 <style>
-.logo_i {
-    width: 58px;
-    height: 70px;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: auto;
-    left: 8px;
-    background: url(../../../static/image/homecontent/juooo.png) 0 0 no-repeat;
-    background-size: 100%;
-}
-.ju_cheng {
-    background: url(../../../static/image/homecontent/ju_cheng.png) 0 0 no-repeat;
-    background-size: 100%;
-}
 </style>
