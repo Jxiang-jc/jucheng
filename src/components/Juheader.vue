@@ -24,7 +24,7 @@
 export default {
   props: ['city'],
   data () {
-    console.log(this.$route.params.city, this.city)
+    // console.log(this.$route.params.city, this.city)
     return {
       currentCity: this.city || '广州'
     }
@@ -121,7 +121,7 @@ export default {
     line-height: 60px;
     font-size: 26px;
     color: #b3b3b3;
-    background: #f0f0f0 url(../../../static/image/homeheader/search.png) no-repeat 25px center;
+    background: #f0f0f0 url(../../static/image/homeheader/search.png) no-repeat 25px center;
     background-size: 24px 24px;
     border-radius: 10px;
     // margin-left: -156px;

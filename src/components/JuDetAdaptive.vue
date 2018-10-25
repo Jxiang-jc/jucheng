@@ -24,7 +24,11 @@
 
 <script>
 import $ from 'jquery'
-import './jq.adaptive-bg'
+import './js/jq.adaptive-bg'
+//  插件的用法哈
+//  <div class='img-wrap'>
+//    <img src="../../assets/logo.png" id="img" data-adaptive-background>
+//  </div>
 // post请求如果不这样做的话无法成功传递参数到后端，后端识别不了
 // 如果想传的是数组 只需要在qs的方法中设置它的indices为false即可
 // 如: qs.stringify({ a: ['b', 'c', 'd'] }, { indices: false })
@@ -159,7 +163,7 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    background: url(../../../static/image/homecontent/juooo.png) 0 0 no-repeat;
+    background: url(../../static/image/homecontent/juooo.png) 0 0 no-repeat;
     background-size: 100%;
 }
 .poster .poster-img .round-num {

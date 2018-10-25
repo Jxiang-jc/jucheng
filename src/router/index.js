@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import juhome from '@/components/home/Juhome'
-import jusearch from '@/components/home/search/jusearch'
-import jucitylist from '@/components/home/citylist/jucitylist'
-import juplay from '@/components/performance/Juplay'
-import judetails from '@/components/details/JuDetails.vue'
+
+import PageView from '@/views/PageView'
+import HomeView from '@/views/HomeView'
+import PlayView from '@/views/PlayView'
+import MineView from '@/views/MineView'
+import DetailView from '@/views/DetailView'
 
 Vue.use(Router)
 
@@ -12,44 +13,51 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: juhome,
-      props: true
+      redirect: '/pages/' // 重定向
     },
     {
-      path: '/jucitylist',
-      name: 'CityList',
-      component: jucitylist,
-      props: true
-    },
-    {
-      path: '/jusearch',
-      name: 'Search',
-      component: jusearch
-    },
-    {
-      path: '/juplay',
-      name: 'Juplay',
-      // redirect: '/juplay/Juall', // 重定向
-      component: juplay
-      // children: [
-      //   {
-      //     path: 'Juall',
-      //     name: 'Juall',
-      //     component: Juall
-      //   },
-      //   {
-      //     path: '',
-      //     component: Juall
-      //     // 如果想要进页面时显示All,就用下面的方法,
-      //     // 如果无所谓,就直接用component即可
-      //   }
-      // ]
-    },
-    {
-      path: '/judetails',
-      name: 'JuDetails',
-      component: judetails
+      path: '/pages',
+      // name: 'home',
+      component: PageView, // 综合试图
+      props: true,
+      children: [
+        {
+          path: '',
+          redirect: '/pages/home'
+        },
+        {
+          path: 'home',
+          name: 'HomeView',
+          component: HomeView, // 主页视图
+          meta: {
+            keepAlive: true // 需要被缓存
+          }
+        },
+        {
+          path: 'play',
+          name: 'PlayView',
+          component: PlayView, // 演出库视图
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'mine',
+          name: 'MineView',
+          component: MineView, // 用户视图
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'detail',
+          name: 'DetailView',
+          component: DetailView, // 详情页
+          meta: {
+            keepAlive: true
+          }
+        }
+      ]
     }
   ]
 })

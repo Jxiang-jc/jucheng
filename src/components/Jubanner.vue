@@ -19,7 +19,7 @@ export default {
   methods: {
     getbanner () {
       this.$http.get('/api/getImg').then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.lunbolist = res.data.data.object_list
       })
     }

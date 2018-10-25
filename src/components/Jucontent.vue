@@ -73,7 +73,7 @@ export default {
           city_id: 3
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.showlists = res.data.data
       })
     },
@@ -94,7 +94,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import '../../stylesheets/_base.scss';
+@import '../stylesheets/_base.scss';
 .showBox,.list-wrap{
     margin-bottom:120px;
 }
@@ -111,12 +111,12 @@ export default {
     position: absolute;
     top: 20px;
     right: 30px;
-    background: url(../../../static/image/homecontent/icon-palace.png) no-repeat
+    background: url(../../static/image/homecontent/icon-palace.png) no-repeat
       center center;
     background-size: 36px 36px;
   }
   .list-icon{
-    background: url(../../../static/image/homecontent/list-icon.png) no-repeat
+    background: url(../../static/image/homecontent/list-icon.png) no-repeat
     center center;
     background-size: 36px 36px;
   }
@@ -239,7 +239,7 @@ export default {
                 min-width: 148px;
                 padding: 0 17px;
                 height: 69px;
-                background: url(../../../static/image/homecontent/bg-priceBtn.png) no-repeat center center;
+                background: url(../../static/image/homecontent/bg-priceBtn.png) no-repeat center center;
                 background-size: 100% 100%;
                 line-height: 55px;
                 color: #fff;
@@ -266,7 +266,7 @@ export default {
 
 </style>
 <style scoped>
->>>.logo_i {
+hot-wrap >>>.logo_i {
     width: 58px;
     height: 70px;
     display: block;
@@ -274,11 +274,11 @@ export default {
     top: 0;
     right: auto;
     left: 8px;
-    background: url(../../../static/image/homecontent/juooo.png) 0 0 no-repeat;
+    background: url(../../static/image/homecontent/juooo.png) 0 0 no-repeat;
     background-size: 100%;
 }
->>>.ju_cheng {
-    background: url(../../../static/image/homecontent/ju_cheng.png) 0 0 no-repeat;
+hot-wrap >>>.ju_cheng {
+    background: url(../../static/image/homecontent/ju_cheng.png) 0 0 no-repeat;
     background-size: 100%;
 }
 </style>

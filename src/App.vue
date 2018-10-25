@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <router-view/>
-    <!-- <Juhome /> -->
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
   </div>
 </template>
 
 <script>
-// import Juhome from './components/home/Juhome.vue'
-
+// import route from './router'
 export default {
   name: 'App',
   components: {
-    // Juhome
+  },
+  mounted () {
+    console.log('123456', this.$route)
   }
 }
 </script>

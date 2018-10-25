@@ -43,7 +43,7 @@ export default {
       this.$http.post('/showlist/Tour/ShowList').then(res => {
         // console.log(res.data.data)
         this.concerts = res.data.data
-        console.log(this.concerts)
+        // console.log(this.concerts)
       })
     }
   },
