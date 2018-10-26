@@ -1,12 +1,12 @@
 <template>
 <header class="search-top border-bt">
     <div class="search-bar">
-        <a href="javascript:void(0);" class="left">
-            <span class="city">全国</span>
+        <router-link :to="{ name: 'CitylistView' }" class="left">
+            <span class="city">{{localCity}}</span>
             <span class="iconfont icon-menu-down"></span>
-        </a>
+        </router-link>
         <!-- router-link 相当于a 标签 -->
-        <router-link to="/jusearch" class="center">
+        <router-link to="/search" class="center">
             <span class="iconfont icon-search"></span>
             <span>搜索演出、艺人或场馆</span>
         </router-link>
@@ -97,7 +97,8 @@ export default {
       slots: [{
         values: ['推荐排序', '时间排序']
       }],
-      filter: '推荐排序'
+      filter: '推荐排序',
+      localCity: '广州'
     }
   },
   methods: {
@@ -135,6 +136,13 @@ export default {
   computed: {
     changePath () {
       return this.$route.query.caid
+    }
+  },
+  created () {
+    if (window.sessionStorage.getItem('localCity')) {
+      this.localCity = window.sessionStorage.getItem('localCity')
+    } else {
+      return this.localCity
     }
   }
 }

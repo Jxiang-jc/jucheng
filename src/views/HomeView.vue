@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Juheader />
+    <Juheader/>
     <Jubanner />
     <Jucategory />
     <Juconcertour />
@@ -18,7 +18,9 @@ import Jucontent from '../components/Jucontent'
 export default {
   components: { Juheader, Jubanner, Jucategory, Juconcertour, Jucontent },
   data () {
-    return {}
+    return {
+      localCity: ''
+    }
   }
 }
 </script>

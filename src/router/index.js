@@ -31,38 +31,34 @@ export default new Router({
         {
           path: 'home',
           name: 'HomeView',
+          props: true,
           component: HomeView, // 主页视图
           meta: {
-            keepAlive: true // 需要被缓存
+            keepAlive: false
           }
         },
         {
           path: 'play',
           name: 'PlayView',
-          component: PlayView, // 演出库视图
-          meta: {
-            keepAlive: true
-          }
+          component: PlayView // 演出库视图
         },
         {
           path: 'mine',
           name: 'MineView',
           component: MineView, // 用户视图
           meta: {
-            keepAlive: true
+            keepAlive: false
           }
         },
         {
           path: 'detail',
           name: 'DetailView',
-          component: DetailView, // 详情页
-          meta: {
-            keepAlive: true
-          }
+          component: DetailView // 详情页
         },
         {
           path: '/citylist',
           name: 'CitylistView',
+          props: true,
           component: CitylistView // 选择城市视图
         }
       ]
@@ -84,7 +80,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/pages/' // 路径错时跳转会首页
+      redirect: '/pages/' // 路径错时跳转回首页
     }
   ]
 })

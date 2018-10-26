@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive> -->
+    <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
@@ -14,7 +14,7 @@ export default {
   components: {
   },
   mounted () {
-    console.log('123456', this.$route)
+    // console.log('123456', this.$route)
   }
 }
 </script>

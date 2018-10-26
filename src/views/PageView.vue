@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import Jufooter from '../components/Jufooter'
+import Jufooter from '../components/Jufooter2'
 
 export default {
   // props: ['city'],

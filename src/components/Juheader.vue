@@ -4,7 +4,7 @@
         <div class="left">
             <router-link :to="{ name: 'CitylistView' }" slot="left" class="link">
             <img src="https://m.juooo.com/public/basic/Home/app/app-juooo5/images/index/location.png">
-                <span class="city">{{currentCity}}</span>
+                <span class="city" v-text="currentCity"></span>
             </router-link>
             <!-- <span class="icon icon-menu-down"></span> -->
         </div>
@@ -15,29 +15,32 @@
 </header>
 </template>
 <script>
-// import Vue from 'vue'
-// import { Header } from 'mint-ui'
-// Vue.use(Header)
-// import axios from 'axios'
-// import $ from 'jquery'
-// import { Indicator } from 'mint-ui'
+// import eventBus from './/vueBus/eventbus'
 export default {
-  props: ['city'],
+//   props: ['city'],
   data () {
     // console.log(this.$route.params.city, this.city)
     return {
-      currentCity: this.city || '广州'
+      currentCity: '广州'
     }
   },
   created () {
-    // 进入先请求一次数据
     this.getLocal()
   },
   methods: {
     getLocal () {
-      this.currentCity = this.currentCity.replace(/市$/, '')
+      this.currentCity = window.sessionStorage.getItem('localCity')
     }
   }
+// 有bug.....
+//   activated () {
+//     // activated : keep-alive组件激活时调用。
+//     // 该钩子在服务器端渲染期间不被调用。
+//     // 根据key名获取传递回来的参数，data就是map
+//     eventBus.$on('choicecity', function (data) {
+//       this.currentCity = data
+//     }.bind(this))
+//   }
 }
 </script>
 <style scoped lang='scss'>
@@ -103,7 +106,7 @@ export default {
 .ind-header .left .link .city {
     display: inline-block;
     min-width: 56px;
-    font-size:32px;
+    font-size: 30px;
     height:90px;
     line-height:90px;
     overflow: hidden;

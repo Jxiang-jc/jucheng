@@ -2,11 +2,11 @@
 <div>
   <header class="search-top border-bt">
     <div class="search-bar search1">
-      <router-link to="/pages" slot="left">
+      <div slot="left">
         <a href="javascript:history.go(-1)" class="left">
           <mt-button icon="back"></mt-button>
         </a>
-      </router-link>
+      </div>
       <a href="javascript:void(0);" class="center">
         <input type="text" id="key" class="search-input" placeholder="演出/艺人/场馆">
         <span class="icon icon-search"></span>

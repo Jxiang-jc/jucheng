@@ -6,8 +6,7 @@
             class="footerwz"
             @click.native="go(tab.id, idx)"
             >
-                <img :src="tab.changeImg ? './static/image/homefooter/' + tab.icon2 + '.png' : tab.icon1"
-                slot="icon">
+                <img :src="tab.changeImg ? '../../static/image/homefooter/' + tab.icon2 + '.png' : tab.icon1" slot="icon">
                 {{tab.title}}
             </mt-tab-item>
         </mt-tabbar>
@@ -18,6 +17,10 @@
 // 而所有副路由都可以传递给主路由。因此可以实现子路由->主路由->子路由。
 /* eslint-disable */ 
 // eslint-disable-next-line
+import Vue from 'vue'
+import { Tabbar } from 'mint-ui'
+Vue.component(Tabbar.name, Tabbar)
+
 export default {
   name: 'JuFooter',
   data () {
@@ -29,7 +32,7 @@ export default {
           id: 'HomeView',
           icon1: 'home1',
           icon2: 'home2',
-          changeImg: ''
+          changeImg: 'true'
         },
         {
           title: '演出库',
@@ -52,7 +55,7 @@ export default {
     this.check()
 
     this.tabs.forEach(item => {
-      item.icon1 = './static/image/homefooter/' + item.icon1 + '.png'
+      item.icon1 = '../../static/image/homefooter/' + item.icon1 + '.png'
     })
   },
   methods: {
@@ -62,10 +65,10 @@ export default {
       if (this.currentTab === 'MineView') { this.focusImg(2) }
     },
     go (id,idx) {
+      console.log(idx)
       // 循环 高亮当前
       this.focusImg(idx)
-
-      if (id === 'HomeView') {
+        if (id === 'HomeView') {
         this.$router.push({name: id})  
       } else if (id === 'PlayView') {
         this.$router.push({name: id, query: {caid: 0}})
@@ -74,10 +77,10 @@ export default {
       } else {
         console.log('错啦')
       }
-      // console.log(id)
       this.currentTab = id
     },
     focusImg (idx) {
+      console.log(idx)
       for(var i = 0; i < this.tabs.length; i++) {
         this.tabs[i].changeImg = false
         this.tabs[idx].changeImg = true

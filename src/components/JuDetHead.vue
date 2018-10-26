@@ -1,10 +1,12 @@
 <template>
 <div>
     <mt-header fixed class="navbar detail-header mui-bar-nav">
-        <router-link :to="{path: 'play', query: {caid: idx}}" slot="left"
-        class="btn-return">
-            <mt-button icon="back"></mt-button>
-        </router-link>
+        <!-- <router-link :to="{path: 'play', query: {caid: idx}}" > -->
+            <mt-button icon="back"
+            slot="left"
+            class="btn-return"
+            @click="goback"></mt-button>
+        <!-- </router-link> -->
         <mt-button icon="more" slot="right" class="btn-dotted"></mt-button>
     </mt-header>
 </div>
@@ -34,6 +36,9 @@ export default {
           }
         })
       })
+    },
+    goback () {
+      window.history.go(-1)
     }
   },
   created () {
