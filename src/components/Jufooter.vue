@@ -29,41 +29,41 @@ export default {
           id: 'HomeView',
           icon1: 'home1',
           icon2: 'home2',
-          changeImg: true
+          changeImg: ''
         },
         {
           title: '演出库',
           id: 'PlayView',
           icon1: 'eye1',
           icon2: 'eye2',
-          changeImg: false
+          changeImg: ''
         },
         {
           title: '我的',
           id: 'MineView',
           icon1: 'mine1',
           icon2: 'mine2',
-          changeImg: false
+          changeImg: ''
         }
       ]
     }
   },
   created () {
-    
+    this.check()
+
     this.tabs.forEach(item => {
       item.icon1 = './static/image/homefooter/' + item.icon1 + '.png'
     })
   },
   methods: {
     check () {
-      console.log(this.$route)
+      if (this.currentTab === 'HomeView') { this.focusImg(0) }
+      if (this.currentTab === 'PlayView') { this.focusImg(1) }
+      if (this.currentTab === 'MineView') { this.focusImg(2) }
     },
     go (id,idx) {
       // 循环 高亮当前
-      for(var i = 0; i < this.tabs.length; i++) {
-        this.tabs[i].changeImg = false
-        this.tabs[idx].changeImg = true
-      }
+      this.focusImg(idx)
 
       if (id === 'HomeView') {
         this.$router.push({name: id})  
@@ -76,6 +76,12 @@ export default {
       }
       // console.log(id)
       this.currentTab = id
+    },
+    focusImg (idx) {
+      for(var i = 0; i < this.tabs.length; i++) {
+        this.tabs[i].changeImg = false
+        this.tabs[idx].changeImg = true
+      }
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
 <div>
     <mt-header fixed class="navbar detail-header mui-bar-nav">
-        <router-link :to="{path: '/juplay', query: {caid: idx}}" slot="left"
+        <router-link :to="{path: 'play', query: {caid: idx}}" slot="left"
         class="btn-return">
             <mt-button icon="back"></mt-button>
         </router-link>

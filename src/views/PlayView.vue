@@ -1,7 +1,7 @@
 <template>
     <div class="ju-play">
-      <ju-play-head :type="sort" :num="dataId" />
-      <ju-play-goods v-on:change="tab" v-on:sort="filt" />
+      <ju-play-head v-on:change="tab" v-on:sort="filt"/>
+      <ju-play-goods :type="sort" :num="dataId" />
     </div>
 </template>
 
@@ -19,12 +19,14 @@ export default {
   },
   methods: {
     filt (val) {
-    //   console.log(val)
-      this.sort = val[0] // 筛选按什么排序
+      // 筛选按什么排序
+      // console.log(val)
+      this.sort = val[0]
     },
-    tab (num) {
-    //   console.log(num)
-      this.dataId = num // 子->父 (用户点击tab标签，按分类重新发起请求)
+    tab (val) {
+      // 子->父 (用户点击tab标签，按分类重新发起请求)
+      console.log(val)
+      this.dataId = val
     }
   }
 }
