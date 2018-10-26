@@ -103,7 +103,7 @@ export default {
   methods: {
     // 刷新保持当前标签高亮
     keepLight (num) {
-      this.$router.push({name: 'juplay', query: {caid: num}})
+      this.$router.push({name: 'PlayView', query: {caid: num}})
       // 为了可以在其他页面获取tab在哪个位置高亮
       window.sessionStorage.setItem('caid', num)
     },

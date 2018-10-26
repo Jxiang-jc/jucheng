@@ -2,14 +2,14 @@
 <header class="navbar ind-header">
     <div class="navbar-inner">
         <div class="left">
-            <router-link to="/jucitylist" slot="left" class="link">
+            <router-link :to="{ name: 'CitylistView' }" slot="left" class="link">
             <img src="https://m.juooo.com/public/basic/Home/app/app-juooo5/images/index/location.png">
                 <span class="city">{{currentCity}}</span>
             </router-link>
             <!-- <span class="icon icon-menu-down"></span> -->
         </div>
-        <router-link to="/jusearch">
-            <a class="center" href="#none">搜索演出、艺人或场馆</a>
+        <router-link to="/search">
+            <span class="center">搜索演出、艺人或场馆</span>
         </router-link>
     </div>
 </header>

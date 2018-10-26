@@ -6,6 +6,10 @@ import HomeView from '@/views/HomeView'
 import PlayView from '@/views/PlayView'
 import MineView from '@/views/MineView'
 import DetailView from '@/views/DetailView'
+import LoginView from '@/views/LoginView'
+import RegisterView from '@/views/RegisterView'
+import CitylistView from '@/views/CitylistView'
+import SearchView from '@/views/SearchView'
 
 Vue.use(Router)
 
@@ -17,7 +21,6 @@ export default new Router({
     },
     {
       path: '/pages',
-      // name: 'home',
       component: PageView, // 综合试图
       props: true,
       children: [
@@ -56,8 +59,32 @@ export default new Router({
           meta: {
             keepAlive: true
           }
+        },
+        {
+          path: '/citylist',
+          name: 'CitylistView',
+          component: CitylistView // 选择城市视图
         }
       ]
+    },
+    {
+      path: '/search',
+      name: 'SearchView',
+      component: SearchView // 搜索视图
+    },
+    {
+      path: '/login',
+      name: 'LoginView',
+      component: LoginView // 登陆视图
+    },
+    {
+      path: '/register',
+      name: 'RegisterView',
+      component: RegisterView // 注册视图
+    },
+    {
+      path: '*',
+      redirect: '/pages/' // 路径错时跳转会首页
     }
   ]
 })

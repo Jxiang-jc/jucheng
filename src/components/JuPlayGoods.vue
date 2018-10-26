@@ -37,7 +37,6 @@
 <script>
 // post请求如果不这样做的话无法成功传递参数到后端，后端识别不了
 import Qs from 'qs'
-import $ from 'jquery' // 目的是为跳转后滚动条的位置
 
 export default {
   props: ['type', 'num'],
@@ -123,7 +122,6 @@ export default {
       var obj = JSON.stringify(this.showlists[idx])
       window.sessionStorage.setItem('goods', obj)
       this.$router.push({name: 'DetailView', params: {}})
-      $(window).scrollTop(0)
     }
   }
 }
