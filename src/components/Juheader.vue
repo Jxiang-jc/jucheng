@@ -29,7 +29,11 @@ export default {
   },
   methods: {
     getLocal () {
-      this.currentCity = window.sessionStorage.getItem('localCity')
+      if (sessionStorage.getItem('localCity')) {
+        this.currentCity = window.sessionStorage.getItem('localCity')
+      } else {
+        this.currentCity = '广州'
+      }
     }
   }
 // 有bug.....

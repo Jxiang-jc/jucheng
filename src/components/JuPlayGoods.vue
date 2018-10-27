@@ -7,7 +7,7 @@
             v-for="(showlist,idx) in showlists" :key="idx"
             @click="detail(idx)">
                 <div class="show-left fl load-img2">
-                    <img :src="`http://image.juooo.com${showlist.pic}`" alt="">
+                    <img v-lazy="`http://image.juooo.com${showlist.pic}`" alt="">
                     <span v-html="showlist.ico"></span>
                 </div>
                 <div class="show-right fl">
@@ -35,8 +35,18 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueLazyload from 'vue-lazyload' // 图片懒加载
+
 // post请求如果不这样做的话无法成功传递参数到后端，后端识别不了
 import Qs from 'qs'
+
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: '../assets/logo1.png',
+  loading: '../assets/logo1.png',
+  attempt: 1
+}) // 这些都可以不加，有默认值。这里是为了测试
 
 export default {
   props: ['type', 'num'],

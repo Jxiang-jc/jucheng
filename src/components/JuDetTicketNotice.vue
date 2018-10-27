@@ -5,6 +5,7 @@
             <img src="http://image.juooo.com/group1/M00/01/9A/rAoKmVvESlSAZruAAABbzlTnxyc625.jpg" title="橙plus卡预购启动" alt="橙plus卡预购启动">
         </a>
     </div>
+    <div class="placeholder"></div>
     <article class="ticket-notice">
         <h3 class="title">— 购票须知 —</h3>
         <div class="ticket-txt">
@@ -27,6 +28,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.placeholder{
+    height:22px;
+    width:100%;
+    background:#eeebeb;
+}
 .Ju-dticket-notice{
     margin-bottom:110px;
 }

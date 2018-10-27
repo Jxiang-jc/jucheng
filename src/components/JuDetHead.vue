@@ -1,6 +1,7 @@
 <template>
-<div>
-    <mt-header fixed class="navbar detail-header mui-bar-nav">
+<div class="det-head">
+    <mt-header fixed class="navbar detail-header mui-bar-nav"
+    title="演出详情">
         <!-- <router-link :to="{path: 'play', query: {caid: idx}}" > -->
             <mt-button icon="back"
             slot="left"
@@ -31,8 +32,12 @@ export default {
           // 滑动到该位置时执行代码
           if (scrollTop > 90) {
             $('.mui-bar-nav').addClass('active')
+            $('.mint-header-title').css('display', 'block')
+            $('.navbar').css('border-bottom', '1px solid #ccc')
           } else {
             $('.mui-bar-nav').removeClass('active')
+            $('.mint-header-title').css('display', 'none')
+            $('.navbar').css('border-bottom', 0)
           }
         })
       })
@@ -106,5 +111,8 @@ export default {
 }
 .mui-bar-nav.active .btn-return >>> .mintui-back:before {
     color:#212121;
+}
+.det-head >>> .mint-header-title {
+  display:none;
 }
 </style>
